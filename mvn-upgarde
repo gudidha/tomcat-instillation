@@ -1,0 +1,17 @@
+mvn upgarde
+
+step 1: 
+as a root go to /opt
+wget https://downloads.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+STEP 2: tar -xvf apache-maven-3.9.4-bin.tar.gz
+step 3: mv apache-maven-3.9.4 maven
+step 4: sudo nano /etc/profile.d/maven.sh --> add below content in the file 
+
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+M2_HOME=/usr/share/maven
+M2=/usr/share/maven/bin
+PATH="/usr/share/maven/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/share/maven/bin"
+
+Step 4: source /etc/profile.d/maven.sh
+
+Step 5 : and now exicute mvn --version
