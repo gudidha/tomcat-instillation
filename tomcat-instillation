@@ -1,0 +1,42 @@
+sudo useradd -m -d /opt/tomcat 
+passwd tomcat 
+sudo apt update
+sudo apt install default-jdk
+java -version
+mkdir /opt/tomcat
+wget https://downloads.apache.org/tomcat/tomcat-10/v10.1.12/bin/apache-tomcat-10.1.12.tar.gz 
+tar xvzf apache-tomcat-8.5.65.tar.gz
+vi /opt/tomcat/.bashrc --> add below lines in .bashrc file.
+. .bashrc
+export JAVA_HOME=/usr/lib/jvm/jjava-11-openjdk --> check default java path
+export CATALINA_HOME=/opt/tomcat/ ---> check where tomcat is installed
+
+/opt/tomcat/bin/startup.sh
+http://publicIP:8080
+-----------------------------------
+To automate the tomcat restart
+echo $PATH
+ ln -s /opt/tomcat/bin/startup.sh /usr/bin/tomcatup
+ ln -s /opt/tomcat/bin/shutdown.sh /usr/bin/tomcatdown
+ 
+ 
+ ------------------------ manager App-----------------
+vi /opt/tomcat/webapps/manager/META-INF/context.xml --> comment 21,22 lines
+vi /opt/tomcat/webapps/host-manager/META-INF/context.xml --> comment 21,22
+
+
+sudo vim /opt/tomcat/conf/tomcat-users.xml
+
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <role rolename="manager-jmx"/>
+  <role rolename="manager-status"/>
+  <role rolename="tomcat-gui"/>
+  <role rolename="tomcat-script"/>
+  <user username="tomcat" password="tomcat" roles="manager-gui, manager-script, manager-jmx, manager-status, tomact-gui, tomcat-script"/>
+WantedBy=multi-user.target
+
+
+ restart --> now we can able to click on manager App
+ 
+-------------------
